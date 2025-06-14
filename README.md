@@ -32,16 +32,16 @@ This is a full-stack blog application built with **Next.js 14**, **Drizzle ORM**
 git clone https://github.com/your-username/next-drizzle-blog.git
 cd next-drizzle-blog
 
-```bash
+###  Install Dependencies  ### 
 npm install
 # or
 yarn
 
 
-```bash
+### set your Database Url  ###
 DATABASE_URL=postgres://user:password@localhost:5432/dbname
 
-```bash
+
 npm run db:push
 # Or however you sync your Drizzle schema
 
