@@ -36,6 +36,7 @@ const CreatePostPage = () => {
           <input
             type="text"
             id="title"
+            autoFocus
             name="title"
             placeholder="Enter post title"
             required

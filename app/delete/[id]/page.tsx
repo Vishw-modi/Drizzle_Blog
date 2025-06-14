@@ -29,27 +29,46 @@ const page = async ({ params }: Params) => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <Link href="/" className="text-blue-500 inline-block mb-4">
-        Back To All Posts
+    <div className="container mx-auto max-w-2xl p-6">
+      <Link
+        href="/"
+        className="inline-block text-blue-600 hover:underline mb-6"
+      >
+        ← Back to All Posts
       </Link>
-      <article>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        <p className="text-sm text-gray-600">
-          Published on {new Date(post.createdAt).toLocaleDateString()}{" "}
-          {post.updatedAt > post.createdAt &&
-            `Updated on ${new Date(post.updatedAt).toLocaleDateString()}`}
+
+      <article className="bg-white border border-gray-200 shadow-md rounded-2xl p-6">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">{post.title}</h1>
+        <p className="text-sm text-gray-500 mb-4">
+          Published on {new Date(post.createdAt).toLocaleDateString()}
+          {post.updatedAt > post.createdAt && (
+            <> · Updated on {new Date(post.updatedAt).toLocaleDateString()}</>
+          )}
         </p>
-        <p className="mt-2">{post.content}</p>
+        <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+          {post.content}
+        </div>
       </article>
 
-      <form action={deletePost}>
-        <button
-          type="submit"
-          className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
-        >
-          Delete
-        </button>
+      <form action={deletePost} className="mt-6">
+        <p className="text-red-600 mb-2">
+          Are you sure you want to delete this post? This action cannot be
+          undone.
+        </p>
+        <div className="flex gap-4">
+          <button
+            type="submit"
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+          >
+            Confirm Delete
+          </button>
+          <Link
+            href={`/post/${post.id}`}
+            className="bg-gray-100 text-gray-800 px-4 py-2 rounded hover:bg-gray-200 transition"
+          >
+            Cancel
+          </Link>
+        </div>
       </form>
     </div>
   );

@@ -35,34 +35,35 @@ const Page = async ({ params }: Params) => {
   }
 
   return (
-    <div className="container mx-auto p-6 max-w-xl">
+    <div className="container mx-auto max-w-2xl p-6">
       <Link
         href={`/post/${post.id}`}
-        className="inline-block mb-6 text-blue-500"
+        className="inline-flex items-center text-blue-600 hover:underline mb-6"
       >
-        Back to Post
+        ← Back to Post
       </Link>
-      <h1 className="text-2xl font-bold mb-6">Edit Post</h1>
+
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Edit Post</h1>
 
       <form
         action={updatePost}
-        className="space-y-6 bg-white p-6 rounded shadow"
+        className="space-y-6 bg-white border border-gray-200 rounded-2xl shadow-md p-6"
       >
         {/* Title */}
         <div>
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 mb-2"
           >
             Title
           </label>
           <input
             id="title"
-            type="text"
             name="title"
-            defaultValue={post.title}
+            type="text"
             required
-            className="w-full border text-slate-500 border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue={post.title}
+            className="w-full border border-gray-300 rounded px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -70,27 +71,30 @@ const Page = async ({ params }: Params) => {
         <div>
           <label
             htmlFor="content"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-gray-700 mb-2"
           >
             Content
           </label>
           <textarea
-            name="content"
             id="content"
-            rows={4}
+            name="content"
+            rows={6}
             required
+            autoFocus
             defaultValue={post.content}
-            className="w-full border text-slate-400 border-gray-300 rounded px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+            className="w-full border border-gray-300 rounded px-4 py-2 text-gray-700 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
         </div>
 
         {/* Submit */}
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Update
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Save Changes
+          </button>
+        </div>
       </form>
     </div>
   );

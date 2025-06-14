@@ -19,25 +19,42 @@ const page = async ({ params }: Awaited<Params>) => {
     .then((res) => res[0]);
 
   return (
-    <div className="container mx-auto p-4">
-      <Link href="/" className="text-blue-500 inline-block mb-4">
-        {" "}
-        Back To All Posts{" "}
+    <div className="container mx-auto max-w-3xl p-6">
+      <Link
+        href="/"
+        className="inline-flex items-center text-blue-600 hover:underline mb-6"
+      >
+        ← Back to All Posts
       </Link>
-      <article>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        <p className="text-sm text-gray-600">
-          Published on{new Date(post.createdAt).toLocaleDateString()}{" "}
-          {post.updatedAt > post.createdAt &&
-            `Updated on ${new Date(post.updatedAt).toLocaleDateString()}`}
-        </p>
-        <p className="mt-2">{post.content}</p>
+
+      <article className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">{post.title}</h1>
+
+        <div className="text-sm text-gray-500 mb-4">
+          <p>Published on {new Date(post.createdAt).toLocaleDateString()}</p>
+          {post.updatedAt > post.createdAt && (
+            <p>Updated on {new Date(post.updatedAt).toLocaleDateString()}</p>
+          )}
+        </div>
+
+        <div className="text-gray-700 leading-relaxed space-y-4">
+          {post.content.split("\n").map((paragraph, idx) => (
+            <p key={idx}>{paragraph}</p>
+          ))}
+        </div>
       </article>
-      <div>
-        <Link href={`/update/${post.id}`} className="text-blue-500 mr-2">
+
+      <div className="mt-6 flex gap-4">
+        <Link
+          href={`/update/${post.id}`}
+          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
+        >
           Update
         </Link>
-        <Link href={`/delete/${post.id}`} className="text-red-500">
+        <Link
+          href={`/delete/${post.id}`}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+        >
           Delete
         </Link>
       </div>
