@@ -7,3 +7,10 @@ export const posts = pgTable("posts", {
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
+
+export const comments = pgTable("comments", {
+    id: serial("id").primaryKey(),
+    postId: serial("post_id").references(() => posts.id).notNull(),
+    content: text("content").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+})

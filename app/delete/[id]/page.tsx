@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { posts } from "@/db/schema";
+import { comments, posts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
@@ -23,6 +23,7 @@ const page = async ({ params }: Params) => {
 
   async function deletePost() {
     "use server";
+    await db.delete(comments).where(eq(comments.postId, post_id));
     await db.delete(posts).where(eq(posts.id, post_id));
     revalidatePath("/");
     throw redirect("/");

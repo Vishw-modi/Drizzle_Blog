@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { db } from "@/db";
-import { posts } from "@/db/schema";
+import { comments, posts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 type Params = {
@@ -17,6 +17,11 @@ const page = async ({ params }: Awaited<Params>) => {
     .from(posts)
     .where(eq(posts.id, post_id))
     .then((res) => res[0]);
+
+  const allComments = await db
+    .select()
+    .from(comments)
+    .where(eq(comments.postId, post_id));
 
   return (
     <div className="container mx-auto max-w-3xl p-6">
@@ -57,6 +62,18 @@ const page = async ({ params }: Awaited<Params>) => {
         >
           Delete
         </Link>
+      </div>
+
+      <div>
+        {allComments.length === 0 ? (
+          <p>No comments</p>
+        ) : (
+          allComments.map((comment) => (
+            <div key={comment.id}>
+              <p>{comment.content}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

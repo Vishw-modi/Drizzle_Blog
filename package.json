@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:push":"drizzle-kit push",
-    "db:studio":"drizzle-kit studio" 
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "next": "15.3.3",
     "pg": "^8.16.0",
     "react": "^19.0.0",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^20",
     "@types/pg": "^8.15.4",
     "@types/react": "^19",
